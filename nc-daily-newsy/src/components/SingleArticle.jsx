@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Loader from "./Loader";
 import * as api from "../utils/api";
 import { Router, Link } from "@reach/router";
-import ArticleComments from "./ArticleComments";
 
 class SingleArticle extends Component {
   state = {

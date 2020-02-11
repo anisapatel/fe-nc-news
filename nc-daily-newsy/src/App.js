@@ -1,6 +1,5 @@
 import "./App.css";
 import React, { Component } from "react";
-import Loader from "./components/Loader";
 import Title from "./components/Title";
 import { Router, Link } from "@reach/router";
 import NavBar from "./components/NavBar";

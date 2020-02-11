@@ -8,7 +8,8 @@ class ArticleList extends Component {
   state = {
     articles: [],
     isLoading: true,
-    topicFilter: undefined
+    topicFilter: undefined,
+    sortFilter: undefined
   };
 
   componentDidMount() {
@@ -18,23 +19,32 @@ class ArticleList extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.articles.topic !== this.state.articles.topic)
+    if (
+      prevState.articles.topic !== this.state.articles.topic ||
+      prevState.articles.sortFilter !== this.state.articles.sortFilter
+    ) {
       api.getAllArticles().then(articles => {
         this.setState({ articles, isLoading: false });
       });
+    }
   }
 
   handleChange = ({ target: { value, id } }) => {
+    console.log(id);
+
     this.setState(currentState => {
       return { ...currentState, [id]: value };
     });
   };
 
   handleSubmit = submitEvent => {
+    console.log(this.state.sortFilter);
     submitEvent.preventDefault();
-    api.getAllArticles(this.state.topicFilter).then(articles => {
-      this.setState({ articles, isLoading: false });
-    });
+    api
+      .getAllArticles(this.state.topicFilter, this.state.sortFilter)
+      .then(articles => {
+        this.setState({ articles, isLoading: false });
+      });
   };
 
   render() {
@@ -43,8 +53,25 @@ class ArticleList extends Component {
       <div>
         <section>
           <form onSubmit={this.handleSubmit} defaultValue="">
+            Sort by:
+            <select id="sortFilter" onChange={this.handleChange}>
+              <option value="undefined">Select</option>
+              <option value="created_at">Date</option>
+              <option value="comment_count">Comment Count</option>
+              <option value="votes">Votes</option>
+            </select>
+            <button>Submit</button>
+          </form>
+        </section>
+        <section>
+          <form onSubmit={this.handleSubmit} defaultValue="">
             Topic:
-            <select id="topicFilter" onChange={this.handleChange}>
+            <select
+              id="topicFilter"
+              onChange={this.handleChange}
+              placeholder="Select"
+            >
+              <option value="undefined">Select</option>
               <option value="coding">coding</option>
               <option value="football">football</option>
               <option value="cooking">cooking</option>

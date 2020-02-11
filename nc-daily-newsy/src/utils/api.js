@@ -1,9 +1,9 @@
 const axios = require("axios");
 
-exports.getAllArticles = topic => {
+exports.getAllArticles = (topic, sort_by) => {
   return axios
     .get("https://daily-newsy.herokuapp.com/api/articles", {
-      params: { topic }
+      params: { topic, sort_by }
     })
     .then(({ data }) => {
       return data.article;
@@ -36,3 +36,18 @@ exports.getCommentsByArticleId = article_id => {
       console.log(err);
     });
 };
+
+// exports.getSortedArticles = query => {
+//   return axios
+//     .get("https://daily-newsy.herokuapp.com/api/articles", {
+//       params: {
+//         sort_by: query
+//       }
+//     })
+//     .then(({ data }) => {
+//       return data.articles;
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     });
+// };

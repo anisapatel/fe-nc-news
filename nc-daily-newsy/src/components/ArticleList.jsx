@@ -3,7 +3,6 @@ import { Router, Link } from "@reach/router";
 import Loader from "./Loader";
 import * as api from "../utils/api";
 import ArticleCard from "./ArticleCard";
-import SingleArticle from "./SingleArticle";
 
 class ArticleList extends Component {
   state = {
@@ -40,7 +39,6 @@ class ArticleList extends Component {
 
   render() {
     if (this.state.isLoading) return <Loader />;
-    // console.log(this.state.articles);
     return (
       <div>
         <section>
@@ -56,7 +54,7 @@ class ArticleList extends Component {
         </section>
         <main>
           {this.state.articles.map(article => {
-            return <ArticleCard {...article} />;
+            return <ArticleCard {...article} key={article.article_id} />;
           })}
         </main>
       </div>

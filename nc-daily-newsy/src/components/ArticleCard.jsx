@@ -1,18 +1,27 @@
 import React from "react";
 import { Router, Link } from "@reach/router";
+import SingleArticle from "./SingleArticle";
 
-const ArticleCard = props => {
-  console.log(props.article_id);
+const ArticleCard = ({
+  article_id,
+  title,
+  topic,
+  created_at,
+  author,
+  votes,
+  comment_count
+}) => {
   return (
     <main>
-      <h3>Title: {props.title}</h3>
-      <Link to={`/articles/${props.article_id}`}>Read Article</Link>
+      <Link to={`/articles/${article_id}`}>
+        <h3>Title: {title}</h3>
+      </Link>
       <ul>
-        <li>Topic: {props.topic} </li>
-        <li>created_at: {props.created_at}</li>
-        <li>author: {props.author}</li>
-        <li>votes: {props.votes}</li>
-        <li>comment_count: {props.comment_count}</li>
+        <li>Topic: {topic} </li>
+        <li>created_at: {created_at}</li>
+        <li>author: {author}</li>
+        <li>votes: {votes}</li>
+        <li>comment_count: {comment_count}</li>
       </ul>
     </main>
   );

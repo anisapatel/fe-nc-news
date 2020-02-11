@@ -30,15 +30,12 @@ class ArticleList extends Component {
   }
 
   handleChange = ({ target: { value, id } }) => {
-    console.log(id);
-
     this.setState(currentState => {
       return { ...currentState, [id]: value };
     });
   };
 
   handleSubmit = submitEvent => {
-    console.log(this.state.sortFilter);
     submitEvent.preventDefault();
     api
       .getAllArticles(this.state.topicFilter, this.state.sortFilter)
@@ -55,7 +52,6 @@ class ArticleList extends Component {
           <form onSubmit={this.handleSubmit} defaultValue="">
             Sort by:
             <select id="sortFilter" onChange={this.handleChange}>
-              <option value="undefined">Select</option>
               <option value="created_at">Date</option>
               <option value="comment_count">Comment Count</option>
               <option value="votes">Votes</option>
@@ -71,7 +67,7 @@ class ArticleList extends Component {
               onChange={this.handleChange}
               placeholder="Select"
             >
-              <option value="undefined">Select</option>
+              <option value="undefined">all</option>
               <option value="coding">coding</option>
               <option value="football">football</option>
               <option value="cooking">cooking</option>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Router, Link } from "@reach/router";
 import SingleArticle from "./SingleArticle";
+import Votes from "./Votes";
 
 const ArticleCard = ({
   article_id,
@@ -23,6 +24,7 @@ const ArticleCard = ({
         <li>votes: {votes}</li>
         <li>comment_count: {comment_count}</li>
       </ul>
+      <Votes votes={votes} article_id={article_id} />
     </main>
   );
 };

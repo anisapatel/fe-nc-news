@@ -44,3 +44,14 @@ exports.patchVotesById = (article_id, votes) => {
     { inc_votes: votes }
   );
 };
+
+exports.getTopics = () => {
+  return axios
+    .get("https://daily-newsy.herokuapp.com/api/topics")
+    .then(({ data }) => {
+      return data.topics;
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};

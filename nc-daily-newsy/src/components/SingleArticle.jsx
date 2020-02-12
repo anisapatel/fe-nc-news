@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import Loader from "./Loader";
 import * as api from "../utils/api";
-import { Link } from "@reach/router";
+import ArticleComments from "./ArticleComments";
 
 class SingleArticle extends Component {
   state = {
     article: {},
-    isLoading: true
+    isLoading: true,
+    areCommentsVisible: false
   };
 
   componentDidMount() {
@@ -23,6 +24,10 @@ class SingleArticle extends Component {
     }
   }
 
+  handleClick = () => {
+    this.setState({ areCommentsVisible: true });
+  };
+
   render() {
     if (this.state.isLoading) return <Loader />;
     return (
@@ -35,10 +40,11 @@ class SingleArticle extends Component {
           <li>author: {this.state.article.author}</li>
           <li>created_at: {this.state.article.created_at}</li>
           <li>comment_count: {this.state.article.comment_count}</li>
-          <Link to={`/articles/${this.props.article_id}/comments`}>
-            <p>View comments</p>
-          </Link>
         </ul>
+        <button onClick={this.handleClick}>View comments</button>
+        {this.state.areCommentsVisible && (
+          <ArticleComments article_id={this.props.article_id} />
+        )}
       </div>
     );
   }

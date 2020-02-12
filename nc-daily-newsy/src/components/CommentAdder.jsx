@@ -15,7 +15,7 @@ class CommentAdder extends Component {
     event.preventDefault();
     api
       .postCommentById(this.props.article_id, { ...this.state })
-      .then(comment => {
+      .then(([comment]) => {
         this.props.addComment(comment);
       });
   };

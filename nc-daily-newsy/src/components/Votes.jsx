@@ -16,7 +16,7 @@ class Votes extends Component {
   render() {
     return (
       <div>
-        <p>{this.state.usersVotes + this.props.votes}</p>
+        {this.state.usersVotes + this.props.votes}
         <button
           onClick={() => {
             this.handleClick(1);

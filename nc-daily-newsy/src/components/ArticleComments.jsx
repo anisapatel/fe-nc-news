@@ -17,14 +17,6 @@ class ArticleComments extends Component {
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.comments !== this.state.comments) {
-      api.getCommentsByArticleId(this.props.article_id).then(comments => {
-        this.setState({ comments, isLoading: false });
-      });
-    }
-  }
-
   addComment = comment => {
     this.setState(currentState => {
       return { comments: [comment, ...currentState.comments] };
@@ -42,7 +34,7 @@ class ArticleComments extends Component {
         <section>
           {this.state.comments.map(comment => {
             return (
-              <main>
+              <main key={comment.comment_id}>
                 <h4> author: {comment.author}</h4>
                 <ul>
                   <li>votes: {comment.votes}</li>

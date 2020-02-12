@@ -1,10 +1,9 @@
 import "./App.css";
 import React, { Component } from "react";
 import Title from "./components/Title";
-import { Router, Link } from "@reach/router";
+import { Router } from "@reach/router";
 import NavBar from "./components/NavBar";
 import ArticleList from "./components/ArticleList";
-import * as api from "./utils/api";
 import SingleArticle from "./components/SingleArticle";
 import ArticleComments from "./components/ArticleComments";
 
@@ -23,7 +22,7 @@ class App extends Component {
         <NavBar />
         <Router>
           <ArticleList path="/" />
-          <ArticleList path="/articles/" />
+          <ArticleList path="/topics/:topic_slug" />
           <SingleArticle path="/articles/:article_id" />
           <ArticleComments path="/articles/:article_id/comments" />
         </Router>

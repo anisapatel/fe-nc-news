@@ -1,6 +1,5 @@
 import React from "react";
-import { Router, Link } from "@reach/router";
-import SingleArticle from "./SingleArticle";
+import { Link } from "@reach/router";
 import Votes from "./Votes";
 
 const ArticleCard = ({
@@ -24,7 +23,7 @@ const ArticleCard = ({
         <li>votes: {votes}</li>
         <li>comment_count: {comment_count}</li>
       </ul>
-      <Votes votes={votes} article_id={article_id} />
+      <Votes votes={votes} id={article_id} type={"articles"} />
     </main>
   );
 };

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Router, Link } from "@reach/router";
+import { Link } from "@reach/router";
 import * as api from "../utils/api";
 
 class NavBar extends Component {
@@ -14,13 +14,12 @@ class NavBar extends Component {
   }
 
   render() {
-    console.log(this.state.topics);
     return (
       <div>
         <nav>
           <Link to="/">Articles</Link>
           {this.state.topics.map(topic => {
-            return <Link to={topic.slug}> {topic.slug} </Link>;
+            return <Link to={`topics/${topic.slug}`}> {topic.slug} </Link>;
           })}
         </nav>
       </div>

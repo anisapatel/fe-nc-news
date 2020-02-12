@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Loader from "./Loader";
 import * as api from "../utils/api";
-import { Router, Link } from "@reach/router";
+import { Link } from "@reach/router";
 
 class SingleArticle extends Component {
   state = {
@@ -15,15 +15,16 @@ class SingleArticle extends Component {
     });
   }
 
-  //   componentDidUpdate(prevProps, prevState) {
-  //     if (prevProps.article_id !== this.props.article_id) {
-  //       api.getArticleById(this.props.article_id).then(article => {
-  //         this.setState({ article, isLoading: false });
-  //       });
-  //     }
-  //   }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.article_id !== this.props.article_id) {
+      api.getArticleById(this.props.article_id).then(article => {
+        this.setState({ article, isLoading: false });
+      });
+    }
+  }
 
   render() {
+    console.log(this.props.article_id);
     if (this.state.isLoading) return <Loader />;
     return (
       <div>

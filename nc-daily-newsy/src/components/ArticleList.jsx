@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Router, Link } from "@reach/router";
 import Loader from "./Loader";
 import * as api from "../utils/api";
 import ArticleCard from "./ArticleCard";
@@ -13,19 +12,15 @@ class ArticleList extends Component {
   };
 
   componentDidMount() {
-    api.getAllArticles().then(articles => {
-      this.setState({ articles, isLoading: false });
-    });
+    this.getArticles();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (
-      prevState.articles.topic !== this.state.articles.topic ||
+      prevProps.topic_slug !== this.props.topic_slug ||
       prevState.articles.sortFilter !== this.state.articles.sortFilter
     ) {
-      api.getAllArticles().then(articles => {
-        this.setState({ articles, isLoading: false });
-      });
+      this.getArticles();
     }
   }
 
@@ -34,17 +29,21 @@ class ArticleList extends Component {
       return { ...currentState, [id]: value };
     });
   };
-
-  handleSubmit = submitEvent => {
-    submitEvent.preventDefault();
+  getArticles = () => {
     api
-      .getAllArticles(this.state.topicFilter, this.state.sortFilter)
+      .getAllArticles(this.props.topic_slug, this.state.sortFilter)
       .then(articles => {
         this.setState({ articles, isLoading: false });
       });
   };
 
+  handleSubmit = submitEvent => {
+    submitEvent.preventDefault();
+    this.getArticles();
+  };
+
   render() {
+    console.log(this.props);
     if (this.state.isLoading) return <Loader />;
     return (
       <div>
@@ -59,7 +58,7 @@ class ArticleList extends Component {
             <button>Submit</button>
           </form>
         </section>
-        <section>
+        {/* <section>
           <form onSubmit={this.handleSubmit} defaultValue="">
             Topic:
             <select
@@ -74,7 +73,7 @@ class ArticleList extends Component {
             </select>
             <button>Submit</button>
           </form>
-        </section>
+        </section> */}
         <main>
           {this.state.articles.map(article => {
             return <ArticleCard {...article} key={article.article_id} />;

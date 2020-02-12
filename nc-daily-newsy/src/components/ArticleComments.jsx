@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
 import Loader from "./Loader";
+import Votes from "./Votes";
 
 class ArticleComments extends Component {
   state = {
@@ -31,6 +32,11 @@ class ArticleComments extends Component {
                   <li>created_at: {comment.created_at}</li>
                   <li>body: {comment.body}</li>
                 </ul>
+                <Votes
+                  votes={comment.votes}
+                  id={comment.comment_id}
+                  type={"comments"}
+                />
               </main>
             );
           })}

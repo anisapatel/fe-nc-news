@@ -7,17 +7,14 @@ class Votes extends Component {
   };
 
   handleClick(votes) {
-    api.patchVotesById(this.props.article_id, votes);
+    api.patchVotesById(this.props.id, votes, this.props.type);
     this.setState(currentState => {
       return { usersVotes: currentState.usersVotes + votes };
     });
   }
 
   render() {
-    console.log(this.props.article_id);
     console.log(this.props.votes);
-    console.log(this.state.usersVotes);
-    console.log(this.state.articles);
     return (
       <div>
         <p>{this.state.usersVotes + this.props.votes}</p>

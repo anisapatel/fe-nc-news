@@ -14,7 +14,6 @@ class Votes extends Component {
   }
 
   render() {
-    console.log(this.props.votes);
     return (
       <div>
         <p>{this.state.usersVotes + this.props.votes}</p>

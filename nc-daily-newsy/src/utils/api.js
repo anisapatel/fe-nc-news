@@ -13,19 +13,6 @@ exports.getAllArticles = (topic, sort_by) => {
     });
 };
 
-// exports.getArticlesByTopic = slug => {
-//   return axios
-//     .get("https://daily-newsy.herokuapp.com/api/articles", {
-//       params: { topic: slug }
-//     })
-//     .then(({ data }) => {
-//       return data.article;
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
-// };
-
 exports.getArticleById = article_id => {
   return axios
     .get(`https://daily-newsy.herokuapp.com/api/articles/${article_id}`)
@@ -51,7 +38,6 @@ exports.getCommentsByArticleId = article_id => {
 };
 
 exports.patchVotesById = (id, votes, type) => {
-  console.log(type);
   return axios.patch(`https://daily-newsy.herokuapp.com/api/${type}/${id}`, {
     inc_votes: votes
   });
@@ -66,4 +52,25 @@ exports.getTopics = () => {
     .catch(err => {
       console.log(err);
     });
+};
+
+exports.postCommentById = (article_id, commentToAdd) => {
+  return axios
+    .post(
+      `https://daily-newsy.herokuapp.com/api/articles/${article_id}/comments`,
+      commentToAdd
+    )
+    .then(({ data }) => {
+      console.log(data.comments);
+      return data.comment;
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+exports.deleteCommentById = comment_id => {
+  return axios.delete(
+    `https://daily-newsy.herokuapp.com/api/comments/${comment_id}`
+  );
 };

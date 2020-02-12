@@ -24,7 +24,6 @@ class SingleArticle extends Component {
   }
 
   render() {
-    console.log(this.props.article_id);
     if (this.state.isLoading) return <Loader />;
     return (
       <div>

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import * as api from "../utils/api";
 import Loader from "./Loader";
 import Votes from "./Votes";
+import CommentAdder from "./CommentAdder";
+import CommentDelete from "./CommentDelete";
 
 class ArticleComments extends Component {
   state = {
@@ -11,17 +13,32 @@ class ArticleComments extends Component {
 
   componentDidMount() {
     api.getCommentsByArticleId(this.props.article_id).then(comments => {
-      console.log(comments);
       this.setState({ comments, isLoading: false });
     });
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.comments !== this.state.comments) {
+      api.getCommentsByArticleId(this.props.article_id).then(comments => {
+        this.setState({ comments, isLoading: false });
+      });
+    }
+  }
+
+  addComment = comment => {
+    this.setState(currentState => {
+      return { comments: [comment, ...currentState.comments] };
+    });
+  };
+
   render() {
-    console.log(this.state.comments);
-    console.log(this.props.article_id);
     if (this.state.isLoading) return <Loader />;
     return (
       <div>
+        <CommentAdder
+          addComment={this.addComment}
+          article_id={this.props.article_id}
+        />
         <section>
           {this.state.comments.map(comment => {
             return (
@@ -37,6 +54,7 @@ class ArticleComments extends Component {
                   id={comment.comment_id}
                   type={"comments"}
                 />
+                <CommentDelete comment_id={comment.comment_id} />
               </main>
             );
           })}

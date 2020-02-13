@@ -2,18 +2,26 @@ import React, { Component } from "react";
 import Loader from "./Loader";
 import * as api from "../utils/api";
 import ArticleComments from "./ArticleComments";
+import ErrHandler from "./ErrHandler";
 
 class SingleArticle extends Component {
   state = {
     article: {},
     isLoading: true,
-    areCommentsVisible: false
+    areCommentsVisible: false,
+    err: null
   };
 
   componentDidMount() {
-    api.getArticleById(this.props.article_id).then(article => {
-      this.setState({ article, isLoading: false });
-    });
+    api
+      .getArticleById(this.props.article_id)
+      .then(article => {
+        this.setState({ article, isLoading: false });
+      })
+      .catch(err => {
+        console.dir(err);
+        this.setState({ isLoading: false, err: err.response.data.msg });
+      });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -30,9 +38,11 @@ class SingleArticle extends Component {
 
   render() {
     if (this.state.isLoading) return <Loader />;
+    if (this.state.err) return <img src="https://http.cat/400" alt="400" />;
+    // <ErrHandler err={this.state.err}  />
     return (
       <div>
-        <h3>Title: {this.state.article.title}</h3>
+        <h3>{this.state.article.title}</h3>
         <p>body: {this.state.article.body}</p>
         <ul>
           <li>votes: {this.state.article.votes}</li>

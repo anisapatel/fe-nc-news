@@ -7,9 +7,6 @@ exports.getAllArticles = (topic, sort_by) => {
     })
     .then(({ data }) => {
       return data.article;
-    })
-    .catch(err => {
-      console.log(err);
     });
 };
 
@@ -18,9 +15,6 @@ exports.getArticleById = article_id => {
     .get(`https://daily-newsy.herokuapp.com/api/articles/${article_id}`)
     .then(({ data }) => {
       return data.article[0];
-    })
-    .catch(err => {
-      console.log(err);
     });
 };
 
@@ -31,16 +25,17 @@ exports.getCommentsByArticleId = article_id => {
     )
     .then(({ data }) => {
       return data.comment;
-    })
-    .catch(err => {
-      console.log(err);
     });
 };
 
 exports.patchVotesById = (id, votes, type) => {
-  return axios.patch(`https://daily-newsy.herokuapp.com/api/${type}/${id}`, {
-    inc_votes: votes
-  });
+  return axios
+    .patch(`https://daily-newsy.herokuapp.com/api/${type}/${id}`, {
+      inc_votes: votes
+    })
+    .then(({ data }) => {
+      console.dir(data);
+    });
 };
 
 exports.getTopics = () => {
@@ -48,9 +43,6 @@ exports.getTopics = () => {
     .get("https://daily-newsy.herokuapp.com/api/topics")
     .then(({ data }) => {
       return data.topics;
-    })
-    .catch(err => {
-      console.log(err);
     });
 };
 
@@ -63,9 +55,6 @@ exports.postCommentById = (article_id, commentToAdd) => {
     .then(({ data }) => {
       console.log(data.comments);
       return data.comment;
-    })
-    .catch(err => {
-      console.log(err);
     });
 };
 

@@ -6,6 +6,8 @@ import NavBar from "./components/NavBar";
 import ArticleList from "./components/ArticleList";
 import SingleArticle from "./components/SingleArticle";
 import ArticleComments from "./components/ArticleComments";
+import Footer from "./components/Footer";
+import ErrHandler from "./components/ErrHandler";
 
 class App extends Component {
   state = {
@@ -17,7 +19,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="wrapper">
         <Title userInfo={this.state.userInfo} />
         <NavBar />
         <Router>
@@ -25,7 +27,9 @@ class App extends Component {
           <ArticleList path="/topics/:topic_slug" />
           <SingleArticle path="/articles/:article_id" />
           <ArticleComments path="/articles/:article_id/comments" />
+          <ErrHandler default />
         </Router>
+        <Footer />
       </div>
     );
   }

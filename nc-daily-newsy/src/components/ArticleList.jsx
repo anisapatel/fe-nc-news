@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import Loader from "./Loader";
 import * as api from "../utils/api";
 import ArticleCard from "./ArticleCard";
+import ErrHandler from "./ErrHandler";
 
 class ArticleList extends Component {
   state = {
     articles: [],
     isLoading: true,
     topicFilter: undefined,
-    sortFilter: undefined
+    sortFilter: undefined,
+    err: null
   };
 
   componentDidMount() {
@@ -34,6 +36,10 @@ class ArticleList extends Component {
       .getAllArticles(this.props.topic_slug, this.state.sortFilter)
       .then(articles => {
         this.setState({ articles, isLoading: false });
+      })
+      .catch(err => {
+        console.dir(err);
+        this.setState({ isLoading: false, err: err.response.data.msg });
       });
   };
 
@@ -45,8 +51,10 @@ class ArticleList extends Component {
   render() {
     console.log(this.props);
     if (this.state.isLoading) return <Loader />;
+    if (this.state.err) return <img src="https://http.cat/404" alt="404" />;
+    // <ErrHandler err={this.state.err} />;
     return (
-      <div>
+      <div className="grid">
         <section>
           <form onSubmit={this.handleSubmit} defaultValue="">
             Sort by:

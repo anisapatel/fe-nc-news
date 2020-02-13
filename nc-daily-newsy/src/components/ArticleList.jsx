@@ -56,14 +56,18 @@ class ArticleList extends Component {
     return (
       <div className="grid">
         <section>
-          <form onSubmit={this.handleSubmit} defaultValue="">
-            Sort by:
-            <select id="sortFilter" onChange={this.handleChange}>
+          <form className="form" onSubmit={this.handleSubmit} defaultValue="">
+            Sort Articles By:
+            <select
+              className="dropdown"
+              id="sortFilter"
+              onChange={this.handleChange}
+            >
               <option value="created_at">Date</option>
               <option value="comment_count">Comment Count</option>
               <option value="votes">Votes</option>
             </select>
-            <button>Submit</button>
+            <button className="button">Submit</button>
           </form>
         </section>
         {/* <section>

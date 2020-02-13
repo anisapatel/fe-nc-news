@@ -7,11 +7,15 @@ class CommentDelete extends Component {
   };
   render() {
     return (
-      <section>
-        <button id="deleteButton" onClick={this.handleDelClick}>
+      <div>
+        <button
+          className="button deleteButton"
+          id="deleteButton"
+          onClick={this.handleDelClick}
+        >
           Delete
         </button>
-      </section>
+      </div>
     );
   }
 }

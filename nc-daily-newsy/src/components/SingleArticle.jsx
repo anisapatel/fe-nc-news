@@ -41,17 +41,21 @@ class SingleArticle extends Component {
     if (this.state.err) return <img src="https://http.cat/400" alt="400" />;
     // <ErrHandler err={this.state.err}  />
     return (
-      <div>
+      <div className="single">
         <h3>{this.state.article.title}</h3>
-        <p>body: {this.state.article.body}</p>
+        <div className="articleBody">
+          <p>Article: {this.state.article.body}</p>
+        </div>
         <ul>
           <li>votes: {this.state.article.votes}</li>
           <li>topic: {this.state.article.topic} </li>
           <li>author: {this.state.article.author}</li>
-          <li>created_at: {this.state.article.created_at}</li>
-          <li>comment_count: {this.state.article.comment_count}</li>
+          <li>date: {this.state.article.created_at}</li>
+          <li>comments: {this.state.article.comment_count}</li>
         </ul>
-        <button onClick={this.handleClick}>View comments</button>
+        <button className="button" onClick={this.handleClick}>
+          View comments
+        </button>
         {this.state.areCommentsVisible && (
           <ArticleComments article_id={this.props.article_id} />
         )}

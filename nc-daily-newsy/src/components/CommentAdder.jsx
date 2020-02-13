@@ -23,7 +23,7 @@ class CommentAdder extends Component {
   render() {
     return (
       <section>
-        <form onSubmit={this.handleSubmit}>
+        <form className="form" onSubmit={this.handleSubmit}>
           {/* <label>
             username:
             <input
@@ -34,7 +34,7 @@ class CommentAdder extends Component {
             />
           </label> */}
           <label>
-            body:
+            Add comment:
             <input
               type="text"
               onChange={this.handleChange}
@@ -42,7 +42,7 @@ class CommentAdder extends Component {
               required
             />
           </label>
-          <button>Submit comment</button>
+          <button className="button">Submit comment</button>
         </form>
       </section>
     );

@@ -26,6 +26,7 @@ class Votes extends Component {
         {this.state.err && <p>Unable to vote!</p>}
         {this.state.usersVotes + this.props.votes}
         <button
+          className="button"
           onClick={() => {
             this.handleClick(1);
           }}
@@ -34,6 +35,7 @@ class Votes extends Component {
           Like
         </button>
         <button
+          className="button"
           onClick={({}) => {
             this.handleClick(-1);
           }}

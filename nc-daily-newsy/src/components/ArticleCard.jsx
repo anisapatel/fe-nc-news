@@ -13,15 +13,15 @@ const ArticleCard = ({
 }) => {
   return (
     <main className="content">
-      <Link to={`/articles/${article_id}`}>
-        <h3>Title: {title}</h3>
+      <Link className="Link" to={`/articles/${article_id}`}>
+        <h4>{title}</h4>
       </Link>
       <ul>
-        <li>Topic: {topic} </li>
-        <li>created_at: {created_at}</li>
+        <li>topic: {topic} </li>
+        <li>created: {created_at}</li>
         <li>author: {author}</li>
         <li>votes: {votes}</li>
-        <li>comment_count: {comment_count}</li>
+        <li>comments: {comment_count}</li>
       </ul>
       <Votes votes={votes} id={article_id} type={"articles"} />
     </main>

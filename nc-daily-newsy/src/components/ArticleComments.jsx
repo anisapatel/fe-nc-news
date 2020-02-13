@@ -38,15 +38,17 @@ class ArticleComments extends Component {
                 <h4> author: {comment.author}</h4>
                 <ul>
                   <li>votes: {comment.votes}</li>
-                  <li>created_at: {comment.created_at}</li>
-                  <li>body: {comment.body}</li>
+                  <li>date: {comment.created_at}</li>
+                  <li>comment: {comment.body}</li>
                 </ul>
-                <Votes
-                  votes={comment.votes}
-                  id={comment.comment_id}
-                  type={"comments"}
-                />
-                <CommentDelete comment_id={comment.comment_id} />
+                <div className="commentInfo">
+                  <Votes
+                    votes={comment.votes}
+                    id={comment.comment_id}
+                    type={"comments"}
+                  />
+                  <CommentDelete comment_id={comment.comment_id} />
+                </div>
               </main>
             );
           })}

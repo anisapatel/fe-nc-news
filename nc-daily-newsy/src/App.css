@@ -1,3 +1,15 @@
+@media screen and (min-width: 601px) {
+  .mainTitle {
+    font-size: 60px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .mainTitle {
+    font-size: 30px;
+  }
+}
+
 body {
   margin: 10px;
   /* background-color: rgb(43, 42, 42); */

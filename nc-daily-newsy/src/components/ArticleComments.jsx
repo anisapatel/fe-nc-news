@@ -8,7 +8,8 @@ import CommentDelete from "./CommentDelete";
 class ArticleComments extends Component {
   state = {
     comments: [],
-    isLoading: true
+    isLoading: true,
+    isCommentDeleted: false
   };
 
   componentDidMount() {
@@ -23,7 +24,14 @@ class ArticleComments extends Component {
     });
   };
 
+  deleteComment = () => {
+    api.getCommentsByArticleId(this.props.article_id).then(comments => {
+      this.setState({ comments, isCommentDeleted: true });
+    });
+  };
+
   render() {
+    console.log(this.state);
     if (this.state.isLoading) return <Loader />;
     return (
       <div>
@@ -35,7 +43,7 @@ class ArticleComments extends Component {
           {this.state.comments.map(comment => {
             return (
               <main key={comment.comment_id}>
-                <h4> author: {comment.author}</h4>
+                <h4> {comment.author}</h4>
                 <ul>
                   <li>votes: {comment.votes}</li>
                   <li>date: {comment.created_at}</li>
@@ -47,7 +55,10 @@ class ArticleComments extends Component {
                     id={comment.comment_id}
                     type={"comments"}
                   />
-                  <CommentDelete comment_id={comment.comment_id} />
+                  <CommentDelete
+                    deleteComment={this.deleteComment}
+                    comment_id={comment.comment_id}
+                  />
                 </div>
               </main>
             );

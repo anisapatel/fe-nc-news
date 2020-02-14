@@ -4,10 +4,12 @@ const Title = props => {
   return (
     <div>
       <header className="header">
-        <h1 id="title">NC Daily Newsy</h1>
+        <h1 className="mainTitle" id="title">
+          NC Daily Newsy
+        </h1>
       </header>
       <div>
-        <p>Signed in as: {props.userInfo.user}</p>
+        <p className="sign">Signed in as: {props.userInfo.user}</p>
         <img
           src={props.userInfo.avatar}
           alt={props.userInfo.user}

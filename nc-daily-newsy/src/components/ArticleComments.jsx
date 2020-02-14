@@ -10,13 +10,24 @@ class ArticleComments extends Component {
     comments: [],
     isLoading: true,
     isCommentDeleted: false,
-    userInfo: this.props.userInfo
+    userInfo: this.props.userInfo,
+    commentCount: 0,
+    err: null
   };
 
   componentDidMount() {
-    api.getCommentsByArticleId(this.props.article_id).then(comments => {
-      this.setState({ comments, isLoading: false });
-    });
+    api
+      .getCommentsByArticleId(this.props.article_id)
+      .then(comments => {
+        this.setState({ comments, isLoading: false });
+      })
+      .catch(err => {
+        this.setState({
+          commentCount: 0,
+          err: Response.data,
+          isLoading: false
+        });
+      });
   }
 
   addComment = comment => {
@@ -33,6 +44,8 @@ class ArticleComments extends Component {
 
   render() {
     if (this.state.isLoading) return <Loader />;
+    if (this.state.err) return <p>No comments available!</p>;
+
     return (
       <div>
         <CommentAdder

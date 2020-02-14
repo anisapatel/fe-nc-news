@@ -9,7 +9,8 @@ class ArticleComments extends Component {
   state = {
     comments: [],
     isLoading: true,
-    isCommentDeleted: false
+    isCommentDeleted: false,
+    userInfo: this.props.userInfo
   };
 
   componentDidMount() {
@@ -31,7 +32,6 @@ class ArticleComments extends Component {
   };
 
   render() {
-    console.log(this.state);
     if (this.state.isLoading) return <Loader />;
     return (
       <div>
@@ -58,6 +58,8 @@ class ArticleComments extends Component {
                   <CommentDelete
                     deleteComment={this.deleteComment}
                     comment_id={comment.comment_id}
+                    userInfo={this.state.userInfo}
+                    author={comment.author}
                   />
                 </div>
               </main>

@@ -37,6 +37,7 @@ class SingleArticle extends Component {
   };
 
   render() {
+    // console.log(this.props.userInfo);
     if (this.state.isLoading) return <Loader />;
     if (this.state.err) return <img src="https://http.cat/400" alt="400" />;
     // <ErrHandler err={this.state.err}  />
@@ -57,7 +58,10 @@ class SingleArticle extends Component {
           View comments
         </button>
         {this.state.areCommentsVisible && (
-          <ArticleComments article_id={this.props.article_id} />
+          <ArticleComments
+            article_id={this.props.article_id}
+            userInfo={this.props.userInfo}
+          />
         )}
       </div>
     );

@@ -38,7 +38,6 @@ class ArticleList extends Component {
         this.setState({ articles, isLoading: false });
       })
       .catch(err => {
-        console.dir(err);
         this.setState({ isLoading: false, err: err.response.data.msg });
       });
   };
@@ -49,7 +48,6 @@ class ArticleList extends Component {
   };
 
   render() {
-    console.log(this.props);
     if (this.state.isLoading) return <Loader />;
     if (this.state.err) return <img src="https://http.cat/404" alt="404" />;
     // <ErrHandler err={this.state.err} />;

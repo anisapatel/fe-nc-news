@@ -1,13 +1,16 @@
-@media screen and (min-width: 601px) {
-  .mainTitle {
-    font-size: 60px;
+@media screen and (max-width: 600px) {
+  /* .navbar {
+    float: left;
+    width: 5%;
+    background-color: blanchedalmond;
+  } */
+  .h1 {
+    font-size: 8px;
   }
 }
 
-@media screen and (max-width: 600px) {
-  .mainTitle {
-    font-size: 30px;
-  }
+.sign {
+  -ms-text-size-adjust: auto;
 }
 
 body {
@@ -99,7 +102,8 @@ li :hover:not(.active) {
 
 h1 {
   text-justify: newspaper;
-  font-size: 50px;
+  font-size: 48px;
+  text-align: start;
 }
 
 .Link {
